@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bat.wz.mbg.mapper.CommodityListMapper">
+  <resultMap id="BaseResultMap" type="com.bat.wz.mbg.entity.CommodityList">
+    <id column="Good_ID" jdbcType="VARCHAR" property="goodId" />
+    <result column="Classify_ID" jdbcType="INTEGER" property="classifyId" />
+    <result column="Classify_Description" jdbcType="VARCHAR" property="classifyDescription" />
+    <result column="Good_Brand" jdbcType="VARCHAR" property="goodBrand" />
+    <result column="Good_Name" jdbcType="VARCHAR" property="goodName" />
+    <result column="Good_Price" jdbcType="VARCHAR" property="goodPrice" />
+    <result column="Store_Add" jdbcType="VARCHAR" property="storeAdd" />
+    <result column="Monthsale_Num" jdbcType="INTEGER" property="monthsaleNum" />
+    <result column="Color_Classification" jdbcType="VARCHAR" property="colorClassification" />
+    <result column="Comment_Num" jdbcType="INTEGER" property="commentNum" />
+    <result column="Good_AfterRate" jdbcType="VARCHAR" property="goodAfterrate" />
+    <result column="IndustryCompare" jdbcType="VARCHAR" property="industrycompare" />
+    <result column="Good_Link" jdbcType="VARCHAR" property="goodLink" />
+    <result column="Store_Name" jdbcType="VARCHAR" property="storeName" />
+    <result column="Store_Link" jdbcType="VARCHAR" property="storeLink" />
+    <result column="Good_Hot" jdbcType="INTEGER" property="goodHot" />
+    <result column="Store_Age" jdbcType="VARCHAR" property="storeAge" />
+    <result column="Seller_Credit" jdbcType="VARCHAR" property="sellerCredit" />
+    <result column="Ishas_License" jdbcType="INTEGER" property="ishasLicense" />
+    <result column="DescriptionSituation" jdbcType="DOUBLE" property="descriptionsituation" />
+    <result column="ServiceAttitude" jdbcType="DOUBLE" property="serviceattitude" />
+    <result column="LogisticsService" jdbcType="DOUBLE" property="logisticsservice" />
+    <result column="Size" jdbcType="VARCHAR" property="size" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    Good_ID, Classify_ID, Classify_Description, Good_Brand, Good_Name, Good_Price, Store_Add, 
+    Monthsale_Num, Color_Classification, Comment_Num, Good_AfterRate, IndustryCompare, 
+    Good_Link, Store_Name, Store_Link, Good_Hot, Store_Age, Seller_Credit, Ishas_License, 
+    DescriptionSituation, ServiceAttitude, LogisticsService, Size
+  </sql>
+  <select id="selectByExample" parameterType="com.bat.wz.mbg.entity.CommodityListExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from commodity_list
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from commodity_list
+    where Good_ID = #{goodId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from commodity_list
+    where Good_ID = #{goodId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bat.wz.mbg.entity.CommodityListExample">
+    delete from commodity_list
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bat.wz.mbg.entity.CommodityList">
+    insert into commodity_list (Good_ID, Classify_ID, Classify_Description, 
+      Good_Brand, Good_Name, Good_Price, 
+      Store_Add, Monthsale_Num, Color_Classification, 
+      Comment_Num, Good_AfterRate, IndustryCompare, 
+      Good_Link, Store_Name, Store_Link, 
+      Good_Hot, Store_Age, Seller_Credit, 
+      Ishas_License, DescriptionSituation, ServiceAttitude, 
+      LogisticsService, Size)
+    values (#{goodId,jdbcType=VARCHAR}, #{classifyId,jdbcType=INTEGER}, #{classifyDescription,jdbcType=VARCHAR}, 
+      #{goodBrand,jdbcType=VARCHAR}, #{goodName,jdbcType=VARCHAR}, #{goodPrice,jdbcType=VARCHAR}, 
+      #{storeAdd,jdbcType=VARCHAR}, #{monthsaleNum,jdbcType=INTEGER}, #{colorClassification,jdbcType=VARCHAR}, 
+      #{commentNum,jdbcType=INTEGER}, #{goodAfterrate,jdbcType=VARCHAR}, #{industrycompare,jdbcType=VARCHAR}, 
+      #{goodLink,jdbcType=VARCHAR}, #{storeName,jdbcType=VARCHAR}, #{storeLink,jdbcType=VARCHAR}, 
+      #{goodHot,jdbcType=INTEGER}, #{storeAge,jdbcType=VARCHAR}, #{sellerCredit,jdbcType=VARCHAR}, 
+      #{ishasLicense,jdbcType=INTEGER}, #{descriptionsituation,jdbcType=DOUBLE}, #{serviceattitude,jdbcType=DOUBLE}, 
+      #{logisticsservice,jdbcType=DOUBLE}, #{size,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bat.wz.mbg.entity.CommodityList">
+    insert into commodity_list
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="goodId != null">
+        Good_ID,
+      </if>
+      <if test="classifyId != null">
+        Classify_ID,
+      </if>
+      <if test="classifyDescription != null">
+        Classify_Description,
+      </if>
+      <if test="goodBrand != null">
+        Good_Brand,
+      </if>
+      <if test="goodName != null">
+        Good_Name,
+      </if>
+      <if test="goodPrice != null">
+        Good_Price,
+      </if>
+      <if test="storeAdd != null">
+        Store_Add,
+      </if>
+      <if test="monthsaleNum != null">
+        Monthsale_Num,
+      </if>
+      <if test="colorClassification != null">
+        Color_Classification,
+      </if>
+      <if test="commentNum != null">
+        Comment_Num,
+      </if>
+      <if test="goodAfterrate != null">
+        Good_AfterRate,
+      </if>
+      <if test="industrycompare != null">
+        IndustryCompare,
+      </if>
+      <if test="goodLink != null">
+        Good_Link,
+      </if>
+      <if test="storeName != null">
+        Store_Name,
+      </if>
+      <if test="storeLink != null">
+        Store_Link,
+      </if>
+      <if test="goodHot != null">
+        Good_Hot,
+      </if>
+      <if test="storeAge != null">
+        Store_Age,
+      </if>
+      <if test="sellerCredit != null">
+        Seller_Credit,
+      </if>
+      <if test="ishasLicense != null">
+        Ishas_License,
+      </if>
+      <if test="descriptionsituation != null">
+        DescriptionSituation,
+      </if>
+      <if test="serviceattitude != null">
+        ServiceAttitude,
+      </if>
+      <if test="logisticsservice != null">
+        LogisticsService,
+      </if>
+      <if test="size != null">
+        Size,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="goodId != null">
+        #{goodId,jdbcType=VARCHAR},
+      </if>
+      <if test="classifyId != null">
+        #{classifyId,jdbcType=INTEGER},
+      </if>
+      <if test="classifyDescription != null">
+        #{classifyDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="goodBrand != null">
+        #{goodBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="goodName != null">
+        #{goodName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodPrice != null">
+        #{goodPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="storeAdd != null">
+        #{storeAdd,jdbcType=VARCHAR},
+      </if>
+      <if test="monthsaleNum != null">
+        #{monthsaleNum,jdbcType=INTEGER},
+      </if>
+      <if test="colorClassification != null">
+        #{colorClassification,jdbcType=VARCHAR},
+      </if>
+      <if test="commentNum != null">
+        #{commentNum,jdbcType=INTEGER},
+      </if>
+      <if test="goodAfterrate != null">
+        #{goodAfterrate,jdbcType=VARCHAR},
+      </if>
+      <if test="industrycompare != null">
+        #{industrycompare,jdbcType=VARCHAR},
+      </if>
+      <if test="goodLink != null">
+        #{goodLink,jdbcType=VARCHAR},
+      </if>
+      <if test="storeName != null">
+        #{storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="storeLink != null">
+        #{storeLink,jdbcType=VARCHAR},
+      </if>
+      <if test="goodHot != null">
+        #{goodHot,jdbcType=INTEGER},
+      </if>
+      <if test="storeAge != null">
+        #{storeAge,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerCredit != null">
+        #{sellerCredit,jdbcType=VARCHAR},
+      </if>
+      <if test="ishasLicense != null">
+        #{ishasLicense,jdbcType=INTEGER},
+      </if>
+      <if test="descriptionsituation != null">
+        #{descriptionsituation,jdbcType=DOUBLE},
+      </if>
+      <if test="serviceattitude != null">
+        #{serviceattitude,jdbcType=DOUBLE},
+      </if>
+      <if test="logisticsservice != null">
+        #{logisticsservice,jdbcType=DOUBLE},
+      </if>
+      <if test="size != null">
+        #{size,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bat.wz.mbg.entity.CommodityListExample" resultType="java.lang.Long">
+    select count(*) from commodity_list
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update commodity_list
+    <set>
+      <if test="record.goodId != null">
+        Good_ID = #{record.goodId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classifyId != null">
+        Classify_ID = #{record.classifyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.classifyDescription != null">
+        Classify_Description = #{record.classifyDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodBrand != null">
+        Good_Brand = #{record.goodBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodName != null">
+        Good_Name = #{record.goodName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodPrice != null">
+        Good_Price = #{record.goodPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storeAdd != null">
+        Store_Add = #{record.storeAdd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.monthsaleNum != null">
+        Monthsale_Num = #{record.monthsaleNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.colorClassification != null">
+        Color_Classification = #{record.colorClassification,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commentNum != null">
+        Comment_Num = #{record.commentNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodAfterrate != null">
+        Good_AfterRate = #{record.goodAfterrate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.industrycompare != null">
+        IndustryCompare = #{record.industrycompare,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodLink != null">
+        Good_Link = #{record.goodLink,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storeName != null">
+        Store_Name = #{record.storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storeLink != null">
+        Store_Link = #{record.storeLink,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodHot != null">
+        Good_Hot = #{record.goodHot,jdbcType=INTEGER},
+      </if>
+      <if test="record.storeAge != null">
+        Store_Age = #{record.storeAge,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sellerCredit != null">
+        Seller_Credit = #{record.sellerCredit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ishasLicense != null">
+        Ishas_License = #{record.ishasLicense,jdbcType=INTEGER},
+      </if>
+      <if test="record.descriptionsituation != null">
+        DescriptionSituation = #{record.descriptionsituation,jdbcType=DOUBLE},
+      </if>
+      <if test="record.serviceattitude != null">
+        ServiceAttitude = #{record.serviceattitude,jdbcType=DOUBLE},
+      </if>
+      <if test="record.logisticsservice != null">
+        LogisticsService = #{record.logisticsservice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.size != null">
+        Size = #{record.size,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update commodity_list
+    set Good_ID = #{record.goodId,jdbcType=VARCHAR},
+      Classify_ID = #{record.classifyId,jdbcType=INTEGER},
+      Classify_Description = #{record.classifyDescription,jdbcType=VARCHAR},
+      Good_Brand = #{record.goodBrand,jdbcType=VARCHAR},
+      Good_Name = #{record.goodName,jdbcType=VARCHAR},
+      Good_Price = #{record.goodPrice,jdbcType=VARCHAR},
+      Store_Add = #{record.storeAdd,jdbcType=VARCHAR},
+      Monthsale_Num = #{record.monthsaleNum,jdbcType=INTEGER},
+      Color_Classification = #{record.colorClassification,jdbcType=VARCHAR},
+      Comment_Num = #{record.commentNum,jdbcType=INTEGER},
+      Good_AfterRate = #{record.goodAfterrate,jdbcType=VARCHAR},
+      IndustryCompare = #{record.industrycompare,jdbcType=VARCHAR},
+      Good_Link = #{record.goodLink,jdbcType=VARCHAR},
+      Store_Name = #{record.storeName,jdbcType=VARCHAR},
+      Store_Link = #{record.storeLink,jdbcType=VARCHAR},
+      Good_Hot = #{record.goodHot,jdbcType=INTEGER},
+      Store_Age = #{record.storeAge,jdbcType=VARCHAR},
+      Seller_Credit = #{record.sellerCredit,jdbcType=VARCHAR},
+      Ishas_License = #{record.ishasLicense,jdbcType=INTEGER},
+      DescriptionSituation = #{record.descriptionsituation,jdbcType=DOUBLE},
+      ServiceAttitude = #{record.serviceattitude,jdbcType=DOUBLE},
+      LogisticsService = #{record.logisticsservice,jdbcType=DOUBLE},
+      Size = #{record.size,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bat.wz.mbg.entity.CommodityList">
+    update commodity_list
+    <set>
+      <if test="classifyId != null">
+        Classify_ID = #{classifyId,jdbcType=INTEGER},
+      </if>
+      <if test="classifyDescription != null">
+        Classify_Description = #{classifyDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="goodBrand != null">
+        Good_Brand = #{goodBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="goodName != null">
+        Good_Name = #{goodName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodPrice != null">
+        Good_Price = #{goodPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="storeAdd != null">
+        Store_Add = #{storeAdd,jdbcType=VARCHAR},
+      </if>
+      <if test="monthsaleNum != null">
+        Monthsale_Num = #{monthsaleNum,jdbcType=INTEGER},
+      </if>
+      <if test="colorClassification != null">
+        Color_Classification = #{colorClassification,jdbcType=VARCHAR},
+      </if>
+      <if test="commentNum != null">
+        Comment_Num = #{commentNum,jdbcType=INTEGER},
+      </if>
+      <if test="goodAfterrate != null">
+        Good_AfterRate = #{goodAfterrate,jdbcType=VARCHAR},
+      </if>
+      <if test="industrycompare != null">
+        IndustryCompare = #{industrycompare,jdbcType=VARCHAR},
+      </if>
+      <if test="goodLink != null">
+        Good_Link = #{goodLink,jdbcType=VARCHAR},
+      </if>
+      <if test="storeName != null">
+        Store_Name = #{storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="storeLink != null">
+        Store_Link = #{storeLink,jdbcType=VARCHAR},
+      </if>
+      <if test="goodHot != null">
+        Good_Hot = #{goodHot,jdbcType=INTEGER},
+      </if>
+      <if test="storeAge != null">
+        Store_Age = #{storeAge,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerCredit != null">
+        Seller_Credit = #{sellerCredit,jdbcType=VARCHAR},
+      </if>
+      <if test="ishasLicense != null">
+        Ishas_License = #{ishasLicense,jdbcType=INTEGER},
+      </if>
+      <if test="descriptionsituation != null">
+        DescriptionSituation = #{descriptionsituation,jdbcType=DOUBLE},
+      </if>
+      <if test="serviceattitude != null">
+        ServiceAttitude = #{serviceattitude,jdbcType=DOUBLE},
+      </if>
+      <if test="logisticsservice != null">
+        LogisticsService = #{logisticsservice,jdbcType=DOUBLE},
+      </if>
+      <if test="size != null">
+        Size = #{size,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Good_ID = #{goodId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bat.wz.mbg.entity.CommodityList">
+    update commodity_list
+    set Classify_ID = #{classifyId,jdbcType=INTEGER},
+      Classify_Description = #{classifyDescription,jdbcType=VARCHAR},
+      Good_Brand = #{goodBrand,jdbcType=VARCHAR},
+      Good_Name = #{goodName,jdbcType=VARCHAR},
+      Good_Price = #{goodPrice,jdbcType=VARCHAR},
+      Store_Add = #{storeAdd,jdbcType=VARCHAR},
+      Monthsale_Num = #{monthsaleNum,jdbcType=INTEGER},
+      Color_Classification = #{colorClassification,jdbcType=VARCHAR},
+      Comment_Num = #{commentNum,jdbcType=INTEGER},
+      Good_AfterRate = #{goodAfterrate,jdbcType=VARCHAR},
+      IndustryCompare = #{industrycompare,jdbcType=VARCHAR},
+      Good_Link = #{goodLink,jdbcType=VARCHAR},
+      Store_Name = #{storeName,jdbcType=VARCHAR},
+      Store_Link = #{storeLink,jdbcType=VARCHAR},
+      Good_Hot = #{goodHot,jdbcType=INTEGER},
+      Store_Age = #{storeAge,jdbcType=VARCHAR},
+      Seller_Credit = #{sellerCredit,jdbcType=VARCHAR},
+      Ishas_License = #{ishasLicense,jdbcType=INTEGER},
+      DescriptionSituation = #{descriptionsituation,jdbcType=DOUBLE},
+      ServiceAttitude = #{serviceattitude,jdbcType=DOUBLE},
+      LogisticsService = #{logisticsservice,jdbcType=DOUBLE},
+      Size = #{size,jdbcType=VARCHAR}
+    where Good_ID = #{goodId,jdbcType=VARCHAR}
+  </update>
+  <select id="findGoods" resultMap="BaseResultMap">
+    select
+    Good_Name,
+    Good_Price,
+    Good_Brand,
+    Store_Add,Color_Classification,
+    Good_Link,Seller_Credit
+    FROM
+    commodity_list a
+    join commodity_classification b
+    on a.Classify_Description=b.Description
+    WHERE 1=1
+    <if test="location != null and location !=''">
+      AND Store_Add LIKE concat(concat('%',#{location}),'%')
+    </if>
+
+  </select>
+</mapper>
