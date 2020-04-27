@@ -1,6 +1,9 @@
 package com.bat.wz.common.api;
 
+import com.bat.wz.nosql.elasticsearch.document.EsProduct;
 import com.github.pagehelper.PageInfo;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -25,6 +28,16 @@ public class CommonPage<T> {
         result.setTotal(pageInfo.getTotal());
         result.setTotalPage(pageInfo.getPages());
         result.setList(pageInfo.getList());
+        return result;
+    }
+
+    public static <T> CommonPage<T> restPage(Page<T> pageInfo) {
+        CommonPage<T> result = new CommonPage<>();
+        result.setPageNum(pageInfo.getNumber());
+        result.setPageSize(pageInfo.getSize());
+        result.setTotal(pageInfo.getTotalElements());
+        result.setTotalPage(pageInfo.getTotalPages());
+        result.setList(pageInfo.getContent());
         return result;
     }
 
